@@ -1,7 +1,6 @@
-﻿using System;
+﻿using Eadent.Helpers;
+using System;
 using System.Web.UI;
-using Eadent.Helpers;
-
 using ContactData = Eadent.DataAccess.Xml.Contact;
 
 namespace Eadent
@@ -10,9 +9,10 @@ namespace Eadent
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            string FilePath = MapPath("/App_Data/Xml/Contact.xml");  // TODO: Consider obtaining from Configuration.
-            string Guid = null;
-            string RemoteAddress = Utility.GetRemoteAddress(Request);
+            string contactFilePath = MapPath("/App_Data/Xml/Contact.xml");  // TODO: Consider obtaining from Configuration.
+
+            string guid = null;
+            string remoteAddress = Utility.GetRemoteAddress(Request);
 
             if (IsPostBack) // Post Back. Let the Submit Button handler deal with this case.
             {
@@ -26,9 +26,9 @@ namespace Eadent
 
                 do
                 {
-                    Guid = System.Guid.NewGuid().ToString("N");
+                    guid = System.Guid.NewGuid().ToString("N");
 
-                    Status = ContactData.Create(FilePath, Guid, RemoteAddress);
+                    Status = ContactData.Create(contactFilePath, guid, remoteAddress);
 
                     if (Status != ContactData.StatusCreated)
                     {
@@ -49,14 +49,14 @@ namespace Eadent
                 }
                 else
                 {
-                    ViewState.Add("FullAccessCode", Guid);  // ASSUMPTION: ViewStateEncryptionMode="Always".
+                    ViewState.Add("FullAccessCode", guid);  // ASSUMPTION: ViewStateEncryptionMode="Always".
 
                     LabelAccessCode.Text =
 #if false
                                            Guid + ": " + 
 #endif
-                                           Guid[28] + "\n" + Guid[29] + "\n" +
-                                           Guid[30] + "\n" + Guid[31];
+                                           guid[28] + "\n" + guid[29] + "\n" +
+                                           guid[30] + "\n" + guid[31];
                 }
             }
         }
@@ -69,7 +69,7 @@ namespace Eadent
 
             if (IsValid)
             {
-                string FilePath = MapPath("/App_Data/Xml/Contact.xml");  // TODO: Consider obtaining from Configuration.
+                string contactFilePath = MapPath("/App_Data/Xml/Contact.xml");  // TODO: Consider obtaining from Configuration.
                 string Guid = null;
                 string RemoteAddress = Utility.GetRemoteAddress(Request);
 
@@ -85,7 +85,7 @@ namespace Eadent
                     {
                         if (PageAccessCode == Guid.Substring(28))
                         {
-                            SubmitResult = ContactData.VerifyCanSend(FilePath, Guid, RemoteAddress);
+                            SubmitResult = ContactData.VerifyCanSend(contactFilePath, Guid, RemoteAddress);
 
                             if (SubmitResult == ContactData.StatusReadyToSend)
                             {
@@ -108,9 +108,9 @@ namespace Eadent
                                         "Message:<br><br>" +
                                         TextMessage.Text.Replace("\n", "<br>");
 
-                                    EMail.Send("Eadent Web Site", "From.Web.Site@Eadent.com", AssemblyInfo.Domain + ": Someone has sent a message from the Eadent Web Site.", htmlBody);
+                                    EMail.Send("Eadent Web Site", "Eadent.Web.Site@Eadent.com", AssemblyInfo.Domain + ": Someone has sent a message from the Eadent Web Site.", htmlBody);
 
-                                    SubmitResult = ContactData.UpdateAsSent(FilePath, Guid, RemoteAddress);
+                                    SubmitResult = ContactData.UpdateAsSent(contactFilePath, Guid, RemoteAddress);
 
                                     if (SubmitResult != ContactData.StatusUpdateOk)
                                     {
@@ -122,7 +122,7 @@ namespace Eadent
                                 }
                                 catch (Exception Exception)     // Unable to send the message.
                                 {
-                                    SubmitResult = ContactData.UpdateAsFailedToSend(FilePath, Guid, RemoteAddress, Exception.Message);
+                                    SubmitResult = ContactData.UpdateAsFailedToSend(contactFilePath, Guid, RemoteAddress, Exception.Message);
 
                                     if (SubmitResult != ContactData.StatusUpdateOk)
                                     {
@@ -130,10 +130,10 @@ namespace Eadent
                                         // TODO: Consider having a Debug Label somewhere?
                                     }
 
-                                    FilePath = MapPath("/App_Data/Xml/FailedToSendMessages/");  // TODO: Consider obtaining from Configuration.
+                                    contactFilePath = MapPath("/App_Data/Xml/FailedToSendMessages/");  // TODO: Consider obtaining from Configuration.
 
                                     // Now [attempt to] keep a copy of the message on the server.
-                                    SubmitResult = DataAccess.Xml.Message.Create(FilePath, Guid, RemoteAddress, Exception.Message,
+                                    SubmitResult = DataAccess.Xml.Message.Create(contactFilePath, Guid, RemoteAddress, Exception.Message,
                                         TextName.Text, TextEMailAddress.Text, Url, TextMessage.Text);
 
                                     if (SubmitResult != DataAccess.Xml.Message.StatusCreated)

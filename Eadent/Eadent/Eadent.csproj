@@ -141,6 +141,7 @@
     <Content Include="DataAccess.Xml\ContactFile.xsc">
       <DependentUpon>ContactFile.xsd</DependentUpon>
     </Content>
+    <Content Include="App_Data\Confidential\E-Mail.settings.json" />
     <None Include="DataAccess.Xml\ContactFile.xsd" />
     <Content Include="DataAccess.Xml\ContactFile.xss">
       <DependentUpon>ContactFile.xsd</DependentUpon>
@@ -210,6 +211,7 @@
     <Compile Include="DataAccess.Xml\ContactFile.Designer.cs" />
     <Compile Include="DataAccess.Xml\Message.cs" />
     <Compile Include="DataAccess.Xml\MessageFile.Designer.cs" />
+    <Compile Include="DataTransferObjects\EMailSettingsDto.cs" />
     <Compile Include="Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -245,9 +247,7 @@
       <DependentUpon>ViewSwitcher.ascx</DependentUpon>
     </Compile>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="App_Data\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-3.4.1.slim.min.map" />
