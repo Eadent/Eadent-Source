@@ -10,7 +10,7 @@
 //
 // Purpose:	Provide Configuration for the following namespace:
 //
-//			EamonnDuffy.DataAccess.Xml
+//			Eadent.DataAccess.Xml
 //
 //---------------------------------------------------------------------------
 
@@ -53,9 +53,9 @@ namespace Eadent.DataAccess.Xml
         {
             // TODO: Consider placing the following in a try/catch block.
 
-            Utility.GetAppSetting("EamonnDuffy.DataAccess.Xml.OpenLockedFile.BackoffSleep",      ref m_OpenLockedFileBackoffSleep);
-            Utility.GetAppSetting("EamonnDuffy.DataAccess.Xml.OpenLockedFile.AbandonTimeout",    ref m_OpenLockedFileAbandonTimeout);
-            Utility.GetAppSetting("EamonnDuffy.DataAccess.Xml.Message.FilePrefix",               ref m_MessageFilePrefix);
+            Utility.GetAppSetting("Eadent.DataAccess.Xml.OpenLockedFile.BackoffSleep",      ref m_OpenLockedFileBackoffSleep);
+            Utility.GetAppSetting("Eadent.DataAccess.Xml.OpenLockedFile.AbandonTimeout",    ref m_OpenLockedFileAbandonTimeout);
+            Utility.GetAppSetting("Eadent.DataAccess.Xml.Message.FilePrefix",               ref m_MessageFilePrefix);
         }
     }
 }

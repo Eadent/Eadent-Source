@@ -24,7 +24,7 @@
     <!-- The following, whilst the original/main site, does not support https loading:
 	<script src="http://code.jquery.com/jquery-latest.pack.js" type="text/javascript"></script>
 	-->
-    <link rel="stylesheet" type="text/css" href="https://www.Eadent.com/Css/Eadent.css" />
+    <link rel="stylesheet" type="text/css" href="/Css/Eadent.css" />
     <script type="text/javascript">
 	<!--
     // Perform relevant jQuery activity only when the Document and DOM are ready.
@@ -63,9 +63,9 @@
                             </strong>
                             <%
                                 DateTime Utc = DateTime.UtcNow;
-                                Response.Write(Utc.ToLongDateString());
-                                Response.Write(" - ");
-                                Response.Write(Utc.ToLongTimeString());
+                                Response.Write(Utc.ToString("dddd") + "<br />");
+                                Response.Write(Utc.ToString("d-MMM-yyyy") + "<br />");
+                                Response.Write(Utc.ToString("h:mm:ss tt") + "<br />");
                             %>
                         </p>
                         <p>
