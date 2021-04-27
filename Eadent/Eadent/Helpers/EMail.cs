@@ -2,6 +2,7 @@
 using MailKit.Net.Smtp;
 using MimeKit;
 using Newtonsoft.Json;
+using System.IO;
 using System.Web;
 
 namespace Eadent.Helpers
@@ -12,7 +13,7 @@ namespace Eadent.Helpers
         {
             string eMailSettingsFilePath = HttpContext.Current.Server.MapPath("/App_Data/Confidential/E-Mail.settings.json");  // TODO: Consider obtaining from Configuration.
 
-            string eMailSettingsString = System.IO.File.ReadAllText(eMailSettingsFilePath);
+            string eMailSettingsString = File.ReadAllText(eMailSettingsFilePath);
 
             EMailSettingsDto eMailSettings = JsonConvert.DeserializeObject<EMailSettingsDto>(eMailSettingsString);
 
