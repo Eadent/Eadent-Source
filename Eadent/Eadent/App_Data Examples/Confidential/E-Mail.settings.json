@@ -2,7 +2,7 @@
   "HostName": "",
   "HostPort": ,
   "SenderEMailAddress": "",
-  "SenderPassword": "!",
+  "SenderPassword": "",
   "FromEMailName": "",
   "FromEMailAddress": ""
 }

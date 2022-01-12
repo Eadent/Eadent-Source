@@ -30,7 +30,7 @@
     // Perform relevant jQuery activity only when the Document and DOM are ready.
     $(document).ready(function () {
         // Cause the initial Input Focus to go to the relevant Text Box.
-        $("#TextName").focus();
+        $("#MainContent_TextName").focus();
     });
 
     var BrowserNow = new Date();
