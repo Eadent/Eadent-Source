@@ -108,7 +108,7 @@ namespace Eadent
                                         "Message:<br><br>" +
                                         TextMessage.Text.Replace("\n", "<br>");
 
-                                    EMail.Send("Eadent Web Site", "Eadent.Web.Site@Eadent.com", AssemblyInfo.Domain + ": Someone has sent a message from the Eadent Web Site.", htmlBody);
+                                    EMail.Send(AssemblyInfo.Domain + ": Someone has sent a message from the Eadent Web Site.", htmlBody);
 
                                     SubmitResult = ContactData.UpdateAsSent(contactFilePath, Guid, RemoteAddress);
 

@@ -1,8 +1,10 @@
 ﻿{
   "HostName": "",
-  "HostPort": ,
+  "HostPort":,
   "SenderEMailAddress": "",
   "SenderPassword": "",
   "FromEMailName": "",
-  "FromEMailAddress": ""
+  "FromEMailAddress": "",
+  "ToEMailName": "",
+  "ToEMailAddress": ""
 }

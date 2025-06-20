@@ -9,7 +9,7 @@ namespace Eadent.Helpers
 {
     public static class EMail
     {
-        public static void Send(string toEMailName, string toEMailAddress, string subject, string htmlBody)
+        public static void Send(string subject, string htmlBody)
         {
             string eMailSettingsFilePath = HttpContext.Current.Server.MapPath("/App_Data/Confidential/E-Mail.settings.json");  // TODO: Consider obtaining from Configuration.
 
@@ -20,7 +20,7 @@ namespace Eadent.Helpers
             var mailMessage = new MimeMessage();
 
             mailMessage.From.Add(new MailboxAddress(eMailSettings.FromEMailName, eMailSettings.FromEMailAddress));
-            mailMessage.To.Add(new MailboxAddress(toEMailName, toEMailAddress));
+            mailMessage.To.Add(new MailboxAddress(eMailSettings.ToEMailName, eMailSettings.ToEMailAddress));
             mailMessage.Subject = subject;
             mailMessage.Body = new TextPart("html")
             {

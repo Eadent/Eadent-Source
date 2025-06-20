@@ -13,5 +13,9 @@
         public string FromEMailName { get; set; }
 
         public string FromEMailAddress { get; set; }
+
+        public string ToEMailName { get; set; }
+
+        public string ToEMailAddress { get; set; }
     }
 }
